@@ -38,15 +38,16 @@ class ActorsInfo(Resource):
         rows = cursor.fetchall()
         jsonData_list = []
         for row in rows:
-            jsonData_list.append({'id': row[0],'first name': row[1],'last name':row[2],'last update':row[3]})
+            jsonData_list.append({'_id': row[0],'first name': row[1],'last name':row[2],'last update':row[3]})
         return jsonify(jsonData_list)
 
 # info of one actor
 class ActorInfo(Resource):
-    def get(id  ):
+    def get(id):
         cursor.execute("SELECT * FROM public.actor WHERE actor_id = %s", (id,))
-        rows = cursor.fetchone()
-        return jsonify({'id': row[0],'first name': row[1],'last name':row[2],'last update':row[3]})
+        row = cursor.fetchone()
+        print(row)
+        return jsonify({'_id': row[0],'first name': row[1],'last name':row[2],'last update':row[3]})
     
 class Addressesinfo(Resource):
     def get(self):
@@ -54,7 +55,7 @@ class Addressesinfo(Resource):
         rows = cursor.fetchall()
         jsonData_list = []
         for row in rows:
-            jsonData_list.append({'id': row[0],'address': row[1],'district':row[3],'city id':row[4],'postal code':row[5],'phone':row[6],'last update':row[7]})
+            jsonData_list.append({'_id': row[0],'address': row[1],'district':row[3],'city id':row[4],'postal code':row[5],'phone':row[6],'last update':row[7]})
         return jsonify(jsonData_list)
 
 class CountriesInfo(Resource):
@@ -63,7 +64,7 @@ class CountriesInfo(Resource):
         rows = cursor.fetchall()
         jsonData_list = []
         for row in rows:
-            jsonData_list.append({'id': row[0],'country': row[1],'last update':row[2]})
+            jsonData_list.append({'_id': row[0],'country': row[1],'last update':row[2]})
         return jsonify(jsonData_list)
 
 api.add_resource(Hello, '/')
